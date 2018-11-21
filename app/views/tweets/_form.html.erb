@@ -1,0 +1,35 @@
+<%# we passed in tweets_ul from feeds/show.html.erb defined as '#feed' which will evaluate to a
+ul defined with id='feed' on that page when we use the .data() method to access later: %>
+
+<%# we stored data-user-id="<%#= user.id in HTML for the button, 
+and we can retrieve it in our JS as el.data('user-id')
+
+showing us we can really pass in whatever we want to partial %>
+
+<form class="simple-form tweet-compose" data-tweets-ul="<%= tweets_ul %>">
+<%# since using ajax now, we can delete these form attributes:
+ action="/tweets" method="POST"> %>
+
+ <%# and we can delete the hidden auth token
+  <input
+      type="hidden"
+      name="authenticity_token"
+      value="= form_authenticity_token %>
+
+  <label for='tweet-textarea'>What's on your mind?</label>
+  <textarea id='tweet-textarea' name="tweet[content]" placeholder="What's on your mind?"></textarea>
+  <strong class="char-left"></strong>
+
+  <label>
+    Mention
+    <select name="tweet[mentioned_user_ids][]">
+      <option></option>
+      <% User.all.each do |user| %>
+        <option value="<%= user.id %>"><%= user.username %></option>
+      <% end %>
+    </select>
+  </label>
+  <br>
+
+  <input type="Submit" value="Post Tweet!">
+</form>
