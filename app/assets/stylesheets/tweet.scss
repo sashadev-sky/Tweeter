@@ -37,7 +37,7 @@
     padding: 20px;
 
     a {
-      color: #1da1f2; 
+      color: #1da1f2;
     }
 
     .tweeter {
@@ -45,16 +45,26 @@
     }
 
 
-    // .tweetee {
-    //   font-size: 16px; 
-    // }
+    .tweetee a {
+      font-size: 16px; 
+    }
 
-    // p {
-    //   font-size: 25px;
-    //   color: black;
-    //   padding: 20px;
-    //   margin: 20px;
-    //   word-break: break-all;
-    // }
+    // they had word-break: break-all which makes it break on any character. but i found a better
+    // one: overflow-wrap: break-word. it only breaks on the word for new line if it absolutely has to if theres 
+    // no other acceptable place to break but it doesnt like encourage it to break like the former.
+
+    p {
+      font-size: 25px;
+      color: black;
+      padding: 20px;
+      margin: 20px;
+      overflow-wrap: break-word;
+      // word-break: break-all;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+    }
   }
 }

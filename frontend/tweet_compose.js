@@ -14,27 +14,32 @@ class TweetCompose {
     
     this.$input.on('input', this.handleInput.bind(this));
 
-    // this.$mentionedUsersDiv = this.$el.find('.mentioned-users');
-    // this.$el.find('.add-mentioned-user').on(
-    //   'click', this.addMentionedUser.bind(this));
-    // this.$mentionedUsersDiv.on(
-    //   'click', '.remove-mentioned-user', this.removeMentionedUser.bind(this));
+    this.$mentionedUsersDiv = this.$el.find('.mentioned-users');
+    this.$el.find('.add-mentioned-user').on(
+      'click', this.addMentionedUser.bind(this));
+    this.$mentionedUsersDiv.on(
+      'click', '.remove-mentioned-user', this.removeMentionedUser.bind(this));
 
     this.$el.on('submit', this.submit.bind(this));
   }
 
-  // addMentionedUser(event) {
-  //   event.preventDefault();
+  addMentionedUser(event) {
+    event.preventDefault();
 
-  //   this.$mentionedUsersDiv.append(this.newUserSelect());
-  // }
-
-  // clearInput() {
-  //   this.$input.val('');
-  //   this.$mentionedUsersDiv.find('ul').empty();
-  //   this.$el.find(':input').prop('disabled', false);
-  //   this.$el.find('.char-left').empty();
-  // }
+    this.$mentionedUsersDiv.append(this.newUserSelect());
+  }
+  /**
+   * 1) sets the value to '' so the textarea becomes blank (.val() setter only takes in 1 param when used as setter)
+   * 2) find the div's that hold the mentioned users selected and clear that 
+   * 3) undisable the button we disabled earlier for the form submission in 'submit' method
+   * 4) empty the field under textarea that tells us how many characters we have
+   */
+  clearInput() {
+    this.$input.val('');
+    this.$mentionedUsersDiv.find('div').empty();
+    this.$el.find(':input').prop('disabled', false);
+    this.$el.find('.char-left').empty();
+  }
 
   handleInput(event) {
     const inputLength = this.$input.val().length;
@@ -49,7 +54,7 @@ class TweetCompose {
     $tweetsUl.append($listEl);
     // $tweetsUl.trigger('insert-tweet', data);
 
-    // this.clearInput();
+    this.clearInput();
   }
 
   newUserSelect() {
@@ -69,10 +74,11 @@ class TweetCompose {
     return $(html);
   }
 
-  // removeMentionedUser(event) {
-  //   event.preventDefault();
-  //   $(event.currentTarget).parent().remove();
-  // }
+  // the parent of the button is the div we made above that holds the button.
+  removeMentionedUser(event) {
+    event.preventDefault();
+    $(event.currentTarget).parent().remove();
+  }
 
   submit(event) {
     event.preventDefault();

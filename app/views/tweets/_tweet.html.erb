@@ -8,10 +8,17 @@
 
   <p><%= tweet.content %></p>
 
-<% if tweet.mentioned_users.length > 0 %>
-  <ul>
+ <ul>Mentions:
     <% tweet.mentioned_users.each do |mentioned_user| %>
-      <li><a href="<%= user_url(mentioned_user) %>"><%= mentioned_user.username %></a></li>
+      <li class='tweetee'>
+        <a href='<%= user_url(mentioned_user) %>'>
+        <% if mentioned_user === tweet.mentioned_users.last %>
+          &nbsp;@<%= mentioned_user.username %>
+        <% else %>
+          &nbsp;@<%= mentioned_user.username %>,
+          </a>
+        <% end %>
+      </li>
     <% end %>
   </ul>
-<% end %>
+</div>
