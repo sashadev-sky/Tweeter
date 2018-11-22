@@ -1,19 +1,25 @@
-.tweet-compose {
-  label {
-    display: none;
-  }
-  // .tweet-actions {
-  //   width: 100%;
-  //   display: flex;
-  //   justify-content: space-between;
-  // }
+.simple-form.tweet-compose {
+  width: 340px;
+
 }
 
-// .infinite-tweets {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-// }
+.tweet-compose {
+  label:first-of-type {
+    display: none;
+  }
+  .tweet-actions {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+// classic for forms
+.infinite-tweets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .tweets {
 

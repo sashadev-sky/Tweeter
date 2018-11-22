@@ -9,6 +9,9 @@
     <style>
      @import url('https://fonts.googleapis.com/css?family=Fredoka+One|Roboto');
     </style>
+    <script type='text/javascript'>
+      window.users = <%= render("users/users.json.jbuilder", users: User.all).html_safe %>; 
+    </script>
   </head>
 
   <body>

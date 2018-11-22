@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resource :session, only: [:create, :destroy, :new]
   resources :tweets, only: [:create]
   # now we have /users/search
+  # and /users/:user_id/follow
   resources :users, only: [:create, :new, :show] do
     get 'search', on: :collection
 
