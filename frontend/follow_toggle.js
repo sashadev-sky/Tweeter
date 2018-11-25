@@ -16,8 +16,10 @@ class FollowToggle {
   handleClick(event) {
     // const followToggle = this;
     event.preventDefault();
-
-    if (this.followState === 'followed') {
+    
+    if (this.followState === 'this is you!' || current_user === this.userId) {
+      this.render()
+    } else if (this.followState === 'followed') {
       this.followState = 'unfollowing';
       this.render();
       APIUtil.unfollowUser(this.userId).then(() => {
@@ -52,6 +54,11 @@ class FollowToggle {
       case 'unfollowing':
         this.$el.prop('disabled', true);
         this.$el.html('Unfollowing...');
+        break;
+      case 'this is you!':
+        this.$el.prop('disabled', true);
+        this.$el.addClass('user-self');
+        this.$el.html('this is you!');
         break;
     }
   }

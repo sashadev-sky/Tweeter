@@ -1,6 +1,8 @@
 <h2 class='page-header'><%= @user.username %></h2>
 
-<%= render 'follows/form', user: @user %>
+<% if current_user_id != @user.id %>
+  <%= render 'follows/form', user: @user %>
+<% end %>
 
 <div class='user-detail'>
 <article class='left-half'>

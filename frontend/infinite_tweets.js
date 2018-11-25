@@ -19,8 +19,7 @@ class InfiniteTweets {
   }
   
   insertTweets(data) {
-    const $li = $(`<li>${JSON.stringify(data)}</li>`);
-    this.$el.find('ul.tweets').append($li);
+    this.$el.find('ul.tweets').append(data.map(this.tweetElement));
   }
 
   fetchTweets(event) {
@@ -43,6 +42,31 @@ class InfiniteTweets {
         infiniteTweets.lastCreatedAt = data[data.length - 1].created_at;
       }
     });
+  }
+
+  tweetElement(tweet) {
+    const mentions = tweet.mentions.map(mention =>
+      `<li class='tweetee'>
+        <a href='/users/${mention.user.id}'>@${mention.user.username}</a>
+      </li>`)
+      .join('');
+
+    const elementString = `
+    <div class='tweet'>
+      <h3 class='tweeter'>
+        <a href='/users/${tweet.user.id}'>
+          @${tweet.user.username}
+        </a>
+      </h3>
+      
+      <p>${tweet.content}</p>
+      
+      <ul>Mentions
+        ${mentions}
+      </ul>
+    </div>`
+
+    return $(elementString);
   }
 
 }

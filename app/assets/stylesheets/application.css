@@ -19,4 +19,5 @@
  @import 'nav.scss';
  @import 'simple-form.scss';
  @import 'search.scss';
- @import 'tweet.scss';
+ @import 'tweet.scss'; 
+ @import 'users.scss'; 

@@ -11,6 +11,9 @@
     </style>
     <script type='text/javascript'>
       window.users = <%= render("users/users.json.jbuilder", users: User.all).html_safe %>; 
+      <% if current_user %> 
+        window.current_user = <%= current_user_id %>
+      <% end %>
     </script>
   </head>
 

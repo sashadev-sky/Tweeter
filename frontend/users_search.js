@@ -44,12 +44,18 @@ class UsersSearch {
       let $a = $('<a></a>');
       $a.text(`@${user.username}`);
       $a.attr('href', `/users/${user.id}`);
-
       const $followToggle = $('<button></button>');
-      new FollowToggle($followToggle, {
-        userId: user.id,
-        followState: user.followed ? 'followed' : 'unfollowed'
-      });
+      if (user.id !== current_user) {
+        new FollowToggle($followToggle, {
+          userId: user.id,
+          followState: user.followed ? 'followed' : 'unfollowed'
+        });
+      } else {
+        new FollowToggle($followToggle, {
+          userId: user.id,
+          followState: 'this is you!'
+        });
+      }
 
       const $li = $('<li></li>');
       $li.append($a);
@@ -59,5 +65,6 @@ class UsersSearch {
     }
   }
 }
+
 
 module.exports = UsersSearch;

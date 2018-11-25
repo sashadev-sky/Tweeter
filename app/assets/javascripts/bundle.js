@@ -193,8 +193,10 @@ class FollowToggle {
   handleClick(event) {
     // const followToggle = this;
     event.preventDefault();
-
-    if (this.followState === 'followed') {
+    
+    if (this.followState === 'this is you!' || current_user === this.userId) {
+      this.render()
+    } else if (this.followState === 'followed') {
       this.followState = 'unfollowing';
       this.render();
       APIUtil.unfollowUser(this.userId).then(() => {
@@ -229,6 +231,11 @@ class FollowToggle {
       case 'unfollowing':
         this.$el.prop('disabled', true);
         this.$el.html('Unfollowing...');
+        break;
+      case 'this is you!':
+        this.$el.prop('disabled', true);
+        this.$el.addClass('user-self');
+        this.$el.html('this is you!');
         break;
     }
   }
@@ -266,8 +273,7 @@ class InfiniteTweets {
   }
   
   insertTweets(data) {
-    const $li = $(`<li>${JSON.stringify(data)}</li>`);
-    this.$el.find('ul.tweets').append($li);
+    this.$el.find('ul.tweets').append(data.map(this.tweetElement));
   }
 
   fetchTweets(event) {
@@ -290,6 +296,31 @@ class InfiniteTweets {
         infiniteTweets.lastCreatedAt = data[data.length - 1].created_at;
       }
     });
+  }
+
+  tweetElement(tweet) {
+    const mentions = tweet.mentions.map(mention =>
+      `<li class='tweetee'>
+        <a href='/users/${mention.user.id}'>@${mention.user.username}</a>
+      </li>`)
+      .join('');
+
+    const elementString = `
+    <div class='tweet'>
+      <h3 class='tweeter'>
+        <a href='/users/${tweet.user.id}'>
+          @${tweet.user.username}
+        </a>
+      </h3>
+      
+      <p>${tweet.content}</p>
+      
+      <ul>Mentions
+        ${mentions}
+      </ul>
+    </div>`
+
+    return $(elementString);
   }
 
 }
@@ -480,12 +511,18 @@ class UsersSearch {
       let $a = $('<a></a>');
       $a.text(`@${user.username}`);
       $a.attr('href', `/users/${user.id}`);
-
       const $followToggle = $('<button></button>');
-      new FollowToggle($followToggle, {
-        userId: user.id,
-        followState: user.followed ? 'followed' : 'unfollowed'
-      });
+      if (user.id !== current_user) {
+        new FollowToggle($followToggle, {
+          userId: user.id,
+          followState: user.followed ? 'followed' : 'unfollowed'
+        });
+      } else {
+        new FollowToggle($followToggle, {
+          userId: user.id,
+          followState: 'this is you!'
+        });
+      }
 
       const $li = $('<li></li>');
       $li.append($a);
@@ -495,6 +532,7 @@ class UsersSearch {
     }
   }
 }
+
 
 module.exports = UsersSearch;
 
