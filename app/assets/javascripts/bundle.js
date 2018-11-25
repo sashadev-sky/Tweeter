@@ -152,16 +152,16 @@ const APIUtil = {
       dataType: 'json',
       data
     })
-  )
+  ),
 
-  // fetchTweets: data => (
-  //   $.ajax({
-  //     url: '/feed',
-  //     method: 'GET',
-  //     dataType: 'json',
-  //     data
-  //   })
-  // )
+  fetchTweets: data => (
+    $.ajax({
+      url: '/feed',
+      method: 'GET',
+      dataType: 'json',
+      data
+    })
+  )
 };
 
 module.exports = APIUtil;
@@ -238,6 +238,66 @@ module.exports = FollowToggle;
 
 /***/ }),
 
+/***/ "./frontend/infinite_tweets.js":
+/*!*************************************!*\
+  !*** ./frontend/infinite_tweets.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+const APIUtil = __webpack_require__(/*! ./api_util */ "./frontend/api_util.js");
+
+class InfiniteTweets {
+  constructor(el) {
+    this.$el = $(el);
+    this.lastCreatedAt = null;
+
+    this.$el.on('click', '.fetch-more', this.fetchTweets.bind(this));
+    this.$el.on('insert-tweet', this.insertTweet.bind(this));
+  }
+
+  // this is for tweetCompose
+  insertTweet(event, data) {
+    this.$el.find('ul.tweets').prepend(this.tweetElement(data));
+
+    if (!this.lastCreatedAt) {
+      this.lastCreatedAt = data.created_at;
+    }
+  }
+  
+  insertTweets(data) {
+    const $li = $(`<li>${JSON.stringify(data)}</li>`);
+    this.$el.find('ul.tweets').append($li);
+  }
+
+  fetchTweets(event) {
+    event.preventDefault();
+
+    const infiniteTweets = this;
+    const data = {};
+    if (this.lastCreatedAt) data.max_created_at = this.lastCreatedAt;
+
+    APIUtil.fetchTweets(data).then((data) => {
+      infiniteTweets.insertTweets(data);
+
+      if (data.length < 20) {
+        infiniteTweets.$el
+          .find('.fetch-more')
+          .replaceWith('<b>No more tweets!</b>');
+      }
+
+      if (data.length > 0) {
+        infiniteTweets.lastCreatedAt = data[data.length - 1].created_at;
+      }
+    });
+  }
+
+}
+
+module.exports = InfiniteTweets;
+
+/***/ }),
+
 /***/ "./frontend/tweet_compose.js":
 /*!***********************************!*\
   !*** ./frontend/tweet_compose.js ***!
@@ -297,9 +357,9 @@ class TweetCompose {
   handleSuccess(data) {
     const $tweetsUl = $(this.$el.data('tweets-ul'));
 
-    const $listEl = $(`<li>${JSON.stringify(data)}</li>`);
-    $tweetsUl.append($listEl);
-    // $tweetsUl.trigger('insert-tweet', data);
+    // const $listEl = $(`<li>${JSON.stringify(data)}</li>`);   old now we just trigger infiniteTweets class to insert the tweet - not dry to do it twice
+    // $tweetsUl.append($listEl);
+    $tweetsUl.trigger('insert-tweet', data);
 
     this.clearInput();
   }
@@ -355,8 +415,10 @@ module.exports = TweetCompose;
 const FollowToggle = __webpack_require__(/*! ./follow_toggle */ "./frontend/follow_toggle.js");
 const UsersSearch = __webpack_require__(/*! ./users_search */ "./frontend/users_search.js");
 const TweetCompose = __webpack_require__(/*! ./tweet_compose */ "./frontend/tweet_compose.js");
+const InfiniteTweets = __webpack_require__(/*! ./infinite_tweets */ "./frontend/infinite_tweets.js");
 
 $(function () {
+  $('div.infinite-tweets').each((i, tweet) => new InfiniteTweets(tweet));
   $('button.follow-toggle').each((i, btn) => new FollowToggle(btn, {}));
   $('.users-search').each((i, search) => new UsersSearch(search));
   $('form.tweet-compose').each((i, form) => new TweetCompose(form));

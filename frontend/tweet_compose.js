@@ -50,9 +50,9 @@ class TweetCompose {
   handleSuccess(data) {
     const $tweetsUl = $(this.$el.data('tweets-ul'));
 
-    const $listEl = $(`<li>${JSON.stringify(data)}</li>`);
-    $tweetsUl.append($listEl);
-    // $tweetsUl.trigger('insert-tweet', data);
+    // const $listEl = $(`<li>${JSON.stringify(data)}</li>`);   old now we just trigger infiniteTweets class to insert the tweet - not dry to do it twice
+    // $tweetsUl.append($listEl);
+    $tweetsUl.trigger('insert-tweet', data);
 
     this.clearInput();
   }
