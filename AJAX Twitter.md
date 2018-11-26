@@ -3,11 +3,28 @@
 ---
 
 ### **summary:** 
-**notes:**
+
+**general notes:**
 - if you want something to be available in any frontend JS file, add it to a `<script>` tag in the `<head>` tag of `application.html.erb` as a variable saved on `window`.
 - if you dont have an ajax method for something, most likely it will be rendering the HTML files everytime not the json ones
 
-**functionalities:**
+**application.js** and **application.css** and **application.html.erb**
+- we no longer link our jQuery in the `head` of our HTML file, rails now handles it for us in its **application.js** manifest file as long as we just include the appropriate gem (jquery-rails)  in gemfile and add the gem names (//= require jquery, //= require jquery_ujs) to the manifest file. 
+  - after these we also have `**//= require_tree**` which include any files in `app/assets/javascripts`, for instance, our `bundle.js
+- from there, rails has the helper tag  **`<%= java`script`_include_tag 'application' %>`**  in the `head` of the HTML file which will manifest all the required JS files just as if we were putting them in a script tag there.
+- This makes it a lot easier for us when we have multiple libraries we want to use in our frontend code
+- Rails does the same thing with our css files, we dont link them here either anymore, they go in **application.css** manifest file and are sent in the HTML through the helper tag  `**<%= stylesheet_link_tag    'application', media: 'all' %>**`
+- **note:** still totally valid to put script tags and link tags for the JS and CSS, respectively, but the point is that we dont have to. 
+  - we actually did that in this project, we imported a google font in a `<style>` tag in the head of application.html.erb (css files get a `<link>` tag, 1 imported google font is not a file event if it is being imported)
+  - we could also have just put it in application.css file, but we were ensuring that it will have the highest precedence. common to put fonts for whole app in the application.html.erb file.
+  - we put it right after the stylesheet_link_tag
+- the 3rd helper_tag we almost always find in the <head> of the HTML is **`<%= csrf_meta_tags %>`**
+  - this has always been here too, it is just a meta tag in which Rails stores the csrf token, but thanks to `jquery_ujs` our `.ajax()` method can use it in all of its requests.
+
+**POJO:**
+- note the syntax in api_util.js. this is a plain old javascript object (ES6 syntax). we dont need classes or anything for our utility functions, and apparently ajax functions can go under their own utility page.
+
+**Interactive functionalities:**
 
 `**follow/unfollow button toggling**`
 - We want to replace the contents of this form with a single HTML element (`**<button>**`) that gets updated via our front-end JavaScript.
@@ -65,6 +82,7 @@
 **gemfile:**
 - `gem 'jbuilder'`   already comes loaded into gemfile
 - `gem 'jquery-rails'`
+  - gives us **jQuery** and **jQuery-ujs**
 - `gem 'serialize_json-rails'`
 
 - Start by running `bundle install`
@@ -82,6 +100,7 @@
   - in a similar fashion to placing <script> tags in our HTML - except that Rails compiles them all into a single file for production. 
 - But **unlike Webpack, Rails doesn't intelligently manage dependencies**, so you still have to be extra **careful about the load order.**
 - It's currently only requiring `jquery` and `jquery_ujs` : 
+> **jQuery_ujs** is what connects us to the cserf meta tags rails puts in the <head>
 ```javascript
 //= require jquery
 //= require jquery_ujs

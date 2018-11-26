@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>AjaxTwitter</title>
+    <%# // this has always been here not new but jquery_ujs
+    allows our .ajax() method to use it in its requests  %>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -9,6 +11,8 @@
     <style>
      @import url('https://fonts.googleapis.com/css?family=Fredoka+One|Roboto');
     </style>
+<%# if want var to b available in any frontend JS file, add it to 
+<script> in head of application.html.erb as a var saved on window. %>
     <script type='text/javascript'>
       window.users = <%= render("users/users.json.jbuilder", users: User.all).html_safe %>; 
       <% if current_user %> 
