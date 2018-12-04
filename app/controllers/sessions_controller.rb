@@ -28,6 +28,5 @@ class SessionsController < ApplicationController
 
   def new
     # presents a login form
-    render :new
   end
 end
