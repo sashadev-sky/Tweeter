@@ -1,0 +1,6 @@
+<button class="follow-toggle"
+  data-user-id="<%= user.id %>"
+  data-initial-follow-state="<%= current_user.follows?(user) ? 'followed' : 'unfollowed' %>"></button>
+
+<%# data-user-id="<%#= user.id stored in HTML for the button can be retrieved as el.data('user-id') %>
+<%# button passed in from feeds/show.html.erb %> 

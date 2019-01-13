@@ -1,0 +1,52 @@
+body {
+  position: relative;
+  z-index: 1;
+  background-color: #d6d6d27d;
+  color: #657786;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Muli', sans-serif;
+}
+
+a {
+  color: #657786;
+}
+
+.tweeter-logo {
+  transform: scale(0.23);
+}
+
+form {
+  padding: 0px;
+}
+
+.page-header {
+  z-index: -1;
+  position: relative;
+  font-family: 'Coiny', cursive;
+  font-size: 45px;
+  color: #1da1f2;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  text-align: center;
+}
+
+.errors {
+  color: red;
+  padding: 10px;
+
+  li {
+    padding-bottom: 10px;
+  }
+}
+
+input[type='submit'], button {
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #1da1f2;
+  color: white;
+  margin-bottom: 25px;
+}

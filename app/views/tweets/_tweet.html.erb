@@ -1,0 +1,23 @@
+<div class='tweet'>
+  <h3 class='tweeter'>
+    <a href='<%= user_url(tweet.user) %>'>
+      @<%= tweet.user.username %>
+    </a>
+  </h3>
+
+  <p><%= tweet.content %></p>
+
+ <ul>Mentions:
+    <% tweet.mentioned_users.each do |mentioned_user| %>
+      <li class='tweetee'>
+        <a href='<%= user_url(mentioned_user) %>'>
+        <% if mentioned_user === tweet.mentioned_users.last %>
+          &nbsp;@<%= mentioned_user.username %>
+        <% else %>
+          &nbsp;@<%= mentioned_user.username %>,
+          </a>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
