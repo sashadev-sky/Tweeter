@@ -4,10 +4,9 @@
 - Rails - DB/Server
 - jQuery - frontend manipulation
 - Bundler - Ruby dependencies
-- Npm - JavaScript dependencies
+- npm - JavaScript dependencies
 - Webpack - module bundler
 - Babel - transpiler
-
 
 ### Setup 
 - `bundle install` - install gems
@@ -17,15 +16,16 @@
 - `rails s` - runs the server
 - in the browser, visit `localhost:3000` (default port. If you have a different one, you can find it specified in your terminal after running the server)
 
+### login
+- username: test
+- password: testtest 
+
 ### Features
-
-- custom auth pattern
-- real time search functionality
-- ability to follow and unfollow users
-- user mentions in posts
-- infinite feed scroll
-- partials for dry code 
+- Hand rolled user authentication system
+- Real-time search functionality
+- Ability toggle follows
+- User mentions in posts
+- Infinite feed scroll
+- Partials for dry code 
 - Adheres to a RESTful API
-
-- implement JS promises for readability
-- jbuilder for building JSON API??
+- JSON data feeds built in jBuilder DSL
