@@ -2,7 +2,6 @@
   "name": "ajax_twitter",
   "private": true,
   "scripts": {
-    "postinstall": "webpack --mode=development",
     "webpack": "webpack --mode=development --watch"
   },
   "dependencies": {
