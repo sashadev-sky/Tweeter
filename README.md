@@ -23,7 +23,7 @@
 ### Features
 - Hand rolled user authentication system
 - Real-time search functionality
-- Ability toggle follows
+- Ability to toggle user follows
 - User mentions in posts
 - Infinite feed scroll
 - Partials for dry code 
