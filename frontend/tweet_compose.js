@@ -23,6 +23,7 @@ class TweetCompose {
   clearInput() {
     this.$input.val('');
     this.$mentionedUsersDiv.find('div').empty();
+    this.$el.prop('disabled', false);
     this.$el.find(':input').prop('disabled', false);
     this.$el.find('.char-left').empty();
   }
@@ -61,11 +62,16 @@ class TweetCompose {
   }
 
   submit(e) {
-    e.preventDefault();
     const data = this.$el.serializeJSON();
+    
+    e.preventDefault();
+
     // disable **after** serializing or values woulld be ignored
-    this.$el.find(':input').prop('disabled', true);
-    APIUtil.createTweet(data).then(tweet => this.handleSuccess(tweet));
+    if (data.tweet.content) {
+      this.$el.prop('disabled', true);
+      this.$el.find(':input').prop('disabled', true);
+      APIUtil.createTweet(data).then(tweet => this.handleSuccess(tweet));
+    }
   }
 }
 
