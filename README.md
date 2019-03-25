@@ -22,10 +22,11 @@
 
 ### Features
 - Hand rolled user authentication system
-- Real-time search functionality
+- Real-time user search functionality
 - Ability to toggle user follows
 - User mentions in posts
 - Infinite feed scroll
 - Partials for dry code 
 - Adheres to a RESTful API
 - JSON data feeds built in jBuilder DSL
+- Performance optimization via debounced user requests
