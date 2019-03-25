@@ -28,6 +28,8 @@ gem 'serialize_json-rails'
 
 gem 'faker'
 
+gem 'lodash-rails'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -6,23 +6,21 @@ class FollowToggle {
     this.followState = (this.$el.data('initial-follow-state') || options.followState);
     this.render();
 
-    this.$el.on('click', this.handleClick.bind(this));
+    this.$el.click(_.debounce(this.handleClick.bind(this), 250));
   }
 
   handleClick(e) {
-    e.preventDefault();
+    const fs = this.followState;
     
-    if (this.followState === 'this is you!' || current_user === this.userId) this.render()
-    else if (this.followState === 'followed') {
-      this.followState = 'unfollowing';
-      this.render();
+    if (fs === 'this is you!' || current_user === this.userId) this.render()
+    else if (fs === 'followed') {
+      this.$el.prop('disabled', true);
       APIUtil.unfollowUser(this.userId).then(() => {
         this.followState = 'unfollowed';
         this.render();
       });
-    } else if (this.followState === 'unfollowed') {
-      this.followState = 'following';
-      this.render();
+    } else if (fs === 'unfollowed') {
+      this.$el.prop('disabled', true);
       APIUtil.followUser(this.userId).then(() => {
         this.followState = 'followed';
         this.render();
@@ -30,30 +28,22 @@ class FollowToggle {
     }
   }
 
-  newHtml(val) {
-    const result = `${val.charAt(0).toUpperCase()}${val.slice(1)}...`;
-    return this.$el.html(result);
-  }
-
   render() {
     const fs = this.followState;
 
-    this.$el.prop('disabled', (i, val) => {
-      val = !val
-    });
-
-    if (fs.slice(-3) === 'ing') this.newHtml(fs)
-
     switch (fs) {
-      case 'followed':
-        this.$el.html('Unfollow!');
+      case "followed":
+        this.$el.prop("disabled", false);
+        this.$el.html("Unfollow!");
         break;
-      case 'unfollowed':
-        this.$el.html('Follow!');
+      case "unfollowed":
+        this.$el.prop("disabled", false);
+        this.$el.html("Follow!");
         break;
-      case 'this is you!':
-        this.$el.addClass('user-self');
-        this.$el.html('this is you!');
+      case "this is you!":
+        this.$el.prop("disabled", true);
+        this.$el.addClass("user-self");
+        this.$el.html("this is you!");
         break;
     }
   }

@@ -49,4 +49,11 @@ input[type='submit'], button {
   background-color: #1da1f2;
   color: white;
   margin-bottom: 25px;
+  outline: none;
+  cursor: pointer;
+}
+
+.follow-toggle:disabled,
+.follow-toggle[disabled] {
+  background-color: #ced3d6;
 }

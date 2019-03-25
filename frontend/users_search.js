@@ -8,7 +8,7 @@ class UsersSearch {
     this.$ul = this.$el.find('.users');
 
     this.$el.find('.simple-form').submit(() => false);
-    this.$input.on('input', this.handleInput.bind(this));
+    this.$input.on('input', _.debounce(this.handleInput.bind(this), 275));
   }
 
   handleInput(e) {
