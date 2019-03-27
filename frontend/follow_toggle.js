@@ -6,7 +6,7 @@ class FollowToggle {
     this.followState = (this.$el.data('initial-follow-state') || options.followState);
     this.render();
 
-    this.$el.click(_.debounce(this.handleClick.bind(this), 250));
+    this.$el.click(_.debounce(this.handleClick.bind(this), 250, { leading: true, trailing: false }));
   }
 
   handleClick(e) {
