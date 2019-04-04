@@ -19,14 +19,14 @@ class UsersSearch {
 
     if (!query) {
       this.$ul.html("");
-      return;
+   
+    } else {
+      if (e.originalEvent.data !== " ") {
+        APIUtil.searchUsers(query).then((users) => 
+          this.render(users)
+        );
+      }
     }
-
-    if (e.originalEvent.data === " ") { return; }
-
-    APIUtil.searchUsers(query).then((users) => 
-      this.render(users)
-    );
   }
 
   render(users) {
