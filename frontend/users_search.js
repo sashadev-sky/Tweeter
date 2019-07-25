@@ -19,10 +19,10 @@ class UsersSearch {
 
     if (!query) {
       this.$ul.html("");
-   
+
     } else {
       if (e.originalEvent.data !== " ") {
-        APIUtil.searchUsers(query).then((users) => 
+        APIUtil.searchUsers(query).then((users) =>
           this.render(users)
         );
       }
@@ -45,27 +45,31 @@ class UsersSearch {
       let $a = $("<a></a>");
       $a.text(`@${user.username}`);
       $a.attr("href", `/users/${user.id}`);
-      const $followToggle = $("<button></button>");
-      if (user.id !== current_user) {
-        new FollowToggle($followToggle, {
-          userId: user.id,
-          followState: user.followed ? "followed" : "unfollowed"
-        });
-      } else {
-        new FollowToggle($followToggle, {
-          userId: user.id,
-          followState: "this is you!"
-        });
-      }
 
       const $li = $("<li></li>");
       $li.append($a);
-      $li.append($followToggle);
+
+      if (current_user) {
+        const $followToggle = $("<button></button>");
+
+        if (user.id !== current_user) {
+          new FollowToggle($followToggle, {
+            userId: user.id,
+            followState: user.followed ? "followed" : "unfollowed"
+          });
+        } else {
+          new FollowToggle($followToggle, {
+            userId: user.id,
+            followState: "this is you!"
+          });
+        }
+
+        $li.append($followToggle);
+      }
 
       this.$ul.append($li);
     }
   }
 }
-
 
 export default UsersSearch;

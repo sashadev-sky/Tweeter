@@ -12,7 +12,7 @@ const APIUtil = {
       method
     })
   ),
- 
+
   searchUsers: query => (
     $.ajax({
       url: '/users/search',
@@ -39,7 +39,6 @@ const APIUtil = {
       data
     })
   )
-  
 };
 
 export default APIUtil;
