@@ -5,12 +5,14 @@
 - jQuery - frontend manipulation
 - Bundler - Ruby dependencies
 - npm - JavaScript dependencies
+- yarn - package Manager
 - Webpack - module bundler
 - Babel - transpiler
 
 ### Setup 
 - `bundle install` - install gems
-- `npm install` - JS dependencies
+- `npm install -g yarn` - install yarn, which is available through npm
+- `yarn install` - JS dependencies
     - postinstall script will transpile the JavaScript for you
 - `rails db:setup` - creates and loads the schema, then seeds the db
 - `rails s` - runs the server

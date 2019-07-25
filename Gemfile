@@ -26,6 +26,8 @@ gem 'jquery-rails'
 
 gem 'serialize_json-rails'
 
+gem 'faker'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -35,7 +37,6 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
-  gem 'faker'
 end
 
 group :development do
