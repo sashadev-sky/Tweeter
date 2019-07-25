@@ -11,8 +11,8 @@
 ### Setup 
 - `bundle install` - install gems
 - `npm install` - JS dependencies
+    - postinstall script will transpile the JavaScript for you
 - `rails db:setup` - creates and loads the schema, then seeds the db
-- `npm run webpack` - transpiles the JavaScript
 - `rails s` - runs the server
 - in the browser, visit `localhost:3000` (default port. If you have a different one, you can find it specified in your terminal after running the server)
 

@@ -1,7 +1,6 @@
 /**
- * this is just practice using vanilla DOM manipulation. Did not use or include
- * this file anywhere in the code nor did it contribute to making the code work
- * I never make an instance of it in our entry file, twitter.js
+ * just practice with vanilla DOM manipulation. Did not include this file
+ * anywhere in the code - I never make an instance of it in the entry file, twitter.js
  */
 const APIUtil = require('./api_util');
 
