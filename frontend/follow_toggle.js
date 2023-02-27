@@ -11,7 +11,7 @@ class FollowToggle {
 
   handleClick(e) {
     const fs = this.followState;
-    
+
     if (fs === 'this is you!' || current_user === this.userId) this.render()
     else if (fs === 'followed') {
       this.$el.prop('disabled', true);

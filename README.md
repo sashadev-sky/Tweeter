@@ -15,17 +15,19 @@
 1. `bundle install` - install gems
 2. `npm install -g yarn` - install Yarn, which is available through npm
 3. `yarn install` - JS dependencies
-    - postinstall script will transpile the JavaScript for you
-4. `rails db:setup` - creates and loads the schema, then seeds the db
-5. `rails s` - runs the server
-6. In the browser, visit `localhost:3000` (default port. If you have a different one, you can find it specified in your terminal after running the server)
+4. `yarn webpack` - transpile JavaScript
+5. `rails db:setup` - creates and loads the schema, then seeds the db
+6. `rails s` - runs the server
+7. In the browser, visit `localhost:3000` (default port. If you have a different one, you can find it specified in your terminal after running the server)
 
-### Login
+### Development
+
+#### Login
 
 - username: test
 - password: testtest
 
-### Testing
+#### Testing
 
 - `rspec` - runs the test suite
 

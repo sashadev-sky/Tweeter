@@ -19,10 +19,10 @@ class UsersSearch {
 
     if (!query) {
       this.$ul.html("");
-   
+
     } else {
       if (e.originalEvent.data !== " ") {
-        APIUtil.searchUsers(query).then((users) => 
+        APIUtil.searchUsers(query).then((users) =>
           this.render(users)
         );
       }

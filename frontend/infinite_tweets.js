@@ -14,7 +14,7 @@ class InfiniteTweets {
     this.$el.find('ul.tweets').prepend(this.tweetElement(data));
     if (!this.lastCreatedAt) this.lastCreatedAt = data.created_at;
   }
-  
+
   insertTweets(data) {
     this.$el.find('ul.tweets').append(data.map(this.tweetElement));
   }
@@ -55,9 +55,9 @@ class InfiniteTweets {
           @${tweet.user.username}&nbsp;
         </a>
       </h3>
-      
+
       <p>${tweet.content}</p>
-      
+
       <ul>Mentions:&nbsp;
         ${mentions}
       </ul>

@@ -63,7 +63,7 @@ class TweetCompose {
 
   submit(e) {
     const data = this.$el.serializeJSON();
-    
+
     e.preventDefault();
 
     // disable **after** serializing or values woulld be ignored

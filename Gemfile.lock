@@ -88,6 +88,8 @@ GEM
     date (3.3.3)
     debug_inspector (1.1.0)
     diff-lcs (1.5.0)
+    dockerfile-rails (1.2.2)
+      rails
     erubi (1.12.0)
     execjs (2.8.1)
     faker (3.1.1)
@@ -132,6 +134,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.14.2)
       mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
+    nokogiri (1.14.2-x86_64-linux)
       racc (~> 1.4)
     pg (1.4.6)
     pry (0.14.2)
@@ -244,6 +248,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   bcrypt (~> 3.1.7)
@@ -252,6 +257,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   coffee-rails
+  dockerfile-rails (>= 1.2)
   faker
   jbuilder (~> 2.5)
   jquery-rails
